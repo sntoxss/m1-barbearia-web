@@ -16,30 +16,69 @@ const barbearia = {
     ],
     estaAberto: true,
 };
-  
-  
 function buscaCortePorId(id) {
+    let corte;
+    for(let i = 0 ; i < barbearia.cortes.length; i++){
+        if(barbearia.cortes[i].id === id){
+            corte = barbearia.cortes[i]
+            return corte
+        }
+    }
+    return "Corte não encontrado"
 }
-
 function buscaBarbaPorId(id) {
+    let barba;
+    for(let i = 0 ; i < barbearia.barbas.length; i++){
+        if(barbearia.barbas[i].id === id){
+            barba = barbearia.barbas[i]
+            return barba
+        }
+    }
+    return "Barba não encontrada"
 }
-
 function verificaStatusBarbearia() {
+    if(barbearia.estaAberto === true){
+        return "Estamos abertos"
+    }else{
+    return "Estamos fechados"
+    }
 }
-
 function retornaTodosCortes() {
+    return barbearia.cortes
 }
-
 function retornaTodasBarbas() {
+    return barbearia.barbas
 }
-
 function criaPedido(nomeCliente, corteId, barbaId) {
-}
+    let corte = buscaCortePorId(corteId);
+    let barba = buscaBarbaPorId(barbaId);
+    let pedido = {
+        nome: nomeCliente,
+        pedidoCorte: corte.tipo,
+        pedidoCortePreco: corte.valor,
+        pedidoBarba: barba.tipo,
+        pedidoBarbaPreco: barba.valor
+    };
 
-function atualizarServico(lista, id, valor, tipo) {
+    return pedido;
 }
+function atualizarServico(lista, id, valor, tipo) {
+    for(let i = 0 ; i < lista.length; i++){
+        if(lista[i].id === id){
+            lista[i].tipo = tipo;
+            lista[i].valor = valor;
+            return lista;
+        }
+    }
+    return lista;
+   }
 
 function calculaTotal(pedido) {
+    if(pedido.pedidoBarbaPreco && pedido.pedidoCortePreco){
+        return pedido.pedidoBarbaPreco + pedido.pedidoCortePreco;
+    }else{
+        return 0;
+    }
+    
+    
 }
-  
-  
